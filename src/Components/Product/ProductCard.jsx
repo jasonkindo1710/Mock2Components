@@ -1,6 +1,6 @@
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import {BsCartPlus} from "react-icons/bs"
 import Product from "../../Assets/ProductPhoto.svg"
+import star from "../../Assets/Stars.svg"
 
 const ProductCard = () => {
   return (
@@ -8,16 +8,17 @@ const ProductCard = () => {
       <div className="w-[305px] h-[395px] border border-solid border-[#B4B1B1] rounded-[5px] bg-[#FFFFFF]">
         <img src={Product} alt="" className="ml-[13px] mt-[8px]"/>
         <div className="ml-[25px] mr-[26px] mt-[-8px]">
-        <div className="w-[212px] h-[37px] mr-[68px] mb-[5px] pb-[5px]"><p className="font-sans text-[32px] font-semibold ">Adidas Shoes</p></div>
+        <div className="w-[212px] h-[37px] mr-[68px] mb-[10px]"><p className="font-sans text-[32px] font-semibold ">Adidas Shoes</p></div>
         <div className="w-[212px] h-[28px] mr-[68px] mb-[5px]"><p className="font-sans text-[18px] font-semibold">ID: 123</p></div>
           
-          <div className="flex text-[#FFD333]">
+          <div className="flex">
             {/* <AiFillStar className="border border-solid border-[#B6B6B6]"/> */}
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
-            <AiFillStar />
+            <img src={star} alt="" className="star ml-[0px]"/>
+            <img src={star} alt="" className="star"/>
+            <img src={star} alt="" className="star"/>
+            <img src={star} alt="" className="star"/>
+            <img src={star} alt="" className="star"/>
+
             <p className="text-[#D70000] ml-[69px] mt-[-3px] font-sans text-[16px] font-semibold" >50% Off</p>
           </div>
           

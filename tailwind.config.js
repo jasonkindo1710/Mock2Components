@@ -6,6 +6,7 @@ module.exports = {
     fontFamily: {
       'sans': ['Arial', 'Helvetica', 'sans-serif'],
       'Almarai': ['Almarai'],
+      'roboto': ['Roboto']
       
     },
     boxShadow: {
