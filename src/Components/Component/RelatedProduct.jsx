@@ -7,9 +7,9 @@ import star from "../../Assets/Stars.svg"
 
 const RelatedProducts = () => {
   return (
-    <div className="w-[1151px] h-[450px] bg-[#FFFFFF] relative">
+    <div className="w-[1151px] h-[450px] bg-[#FFFFFF] mx-auto relative">
       <div className="absolute top-[11px] left-[15px] right-[16px] flex">
-        <p className="w-[198px] h-[28px] text-[24px] font-sans font-bold mt-[-7px]">
+        <p className="w-[200px] h-[28px] text-[24px] font-sans font-bold mt-[-7px]">
           Related Products
         </p>
         <hr className="w-[841px] ml-[9px] mt-[11px] border border-solid border-[#5A5A5A]" />
@@ -17,12 +17,12 @@ const RelatedProducts = () => {
           <RiArrowLeftSLine
             size={15}
             color={'#706D6D'}
-            className="w-[26px] h-[25px] bg-[#C4C4C4] rounded-[5px] ml-[12px] cursor-pointer"
+            className="w-[26px] h-[25px] bg-[#C4C4C4] rounded-[5px] ml-[12px] mt-[-20px] cursor-pointer"
           />
           <RiArrowRightSLine
             size={15}
             color={'#706D6D'}
-            className="w-[26px] h-[25px] bg-[#C4C4C4] rounded-[5px] ml-[8px] pl-[1px] cursor-pointer"
+            className="w-[26px] h-[25px] bg-[#C4C4C4] rounded-[5px] ml-[8px] pl-[1px] mt-[-20px] cursor-pointer"
           />
         </div>
       </div>
