@@ -14,15 +14,12 @@ const Categories = () => {
   const allCategories = useSelector(selectAllCategories)
   const products = useSelector(selectAllProducts);
   
-  
   const handleGetProducts = async (category) => {
     await getProducts(dispatch, category)
     console.log(category)
     navigate('/productpage')
   }
   
-
-
   useEffect(() => {
     getCategories(dispatch);
   },[])

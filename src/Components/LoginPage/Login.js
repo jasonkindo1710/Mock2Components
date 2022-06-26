@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import Img from "../../Assets/shopApp.png"
 import { CgClose } from "react-icons/cg";
 import { useDispatch } from "react-redux";
-import { login } from "../../Redux/Auth/ApiRequest";
+import { login } from "../../Redux/Auth/actions";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

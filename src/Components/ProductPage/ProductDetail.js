@@ -1,6 +1,5 @@
 import React from "react";
 import TopBar from "../Component/TopBar";
-import NavTabs from "../Component/NavTabs";
 import ProductDetailBar from "../Component/ProductDetailBar";
 import Review from "../Component/Review";
 import WriteReview from "../Component/WriteReview";
@@ -17,18 +16,60 @@ import Stars from "../Component/Stars";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { selectImage, selectSingleProduct } from "../../Redux/Products/selectors";
+import {
+  selectImage,
+  selectSingleProduct,
+} from "../../Redux/Products/selectors";
 import StarRatings from "react-star-ratings";
+import NavTabs from "./NavTabs";
+import {
+  selectAccessToken,
+  selectAuth,
+  selectUserID,
+} from "../../Redux/Auth/selectors";
+import { addNewItemsToCart } from "../../Redux/Cart/actions";
 
 function ProductDetail() {
   const [rating, setRating] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const product = useSelector(selectSingleProduct);
-  console.log(product)
+  const auth = useSelector(selectAuth);
+  const userID = useSelector(selectUserID);
+  const accessToken = useSelector(selectAccessToken);
   const image = useSelector(selectImage);
   const changeRating = (newRating) => {
-    setRating(newRating)
-  }
+    setRating(newRating);
+  };
+  const handleDecrease = () => {
+    setQuantity(quantity - 1);
+    if (quantity <= 1) {
+      setQuantity(1);
+    }
+  };
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+  const handleAddToCart = async () => {
+    const newCart = {
+      totalPrice: 5000,
+      userId: userID,
+    };
+    const newItemArr = [
+      {
+        productId: product.id,
+        quantity: quantity,
+        price: product.price,
+        total: quantity * product.price,
+      },
+    ];
+    const item = {
+      cart: newCart,
+      itemArr: newItemArr,
+    };
+    console.log(item);
+    await addNewItemsToCart(accessToken, item, dispatch);
+  };
   return (
     <div>
       <header>
@@ -39,10 +80,16 @@ function ProductDetail() {
         <div className="w-[1439px] h-[612px] relative flex bg-[#FFFDFD] mx-auto">
           <div className="absolute left-[143px] top-[12px] flex flex-col">
             <div>
-              <img src={image.url} className="w-[474px] h-[474px] rounded-[5px]" />
+              <img
+                src={image.url}
+                className="w-[474px] h-[474px] rounded-[5px]"
+              />
             </div>
             <div className="flex w-[474px] h-[87px] mt-[21px]">
-              <img src={image.url} className="w-[87px] h-[87px] rounded-[5px]" />
+              <img
+                src={image.url}
+                className="w-[87px] h-[87px] rounded-[5px]"
+              />
               <img
                 src={image.url}
                 className="w-[87px] h-[87px] ml-[11px] rounded-[5px]"
@@ -124,17 +171,26 @@ function ProductDetail() {
                 </div>
                 <div className="mt-[11.45px] flex h-[45px]">
                   <div className="w-[162.37px] h-[42.08px] bg-[#E2E4E5] border border-solid border-[#959595] rounded-[5px] flex">
-                    <button className="flex-1 text-[#33A0FF] text-[24px] ">
+                    <button
+                      onClick={handleDecrease}
+                      className="flex-1 text-[#33A0FF] text-[24px] "
+                    >
                       -
                     </button>
                     <p className="flex-1 font-roboto text-[16px] text-[#959595] leading-[19.49px] font-light text-center py-[12px]">
-                      1
+                      {quantity}
                     </p>
-                    <button className="flex-1 text-[#33A0FF] text-[24px]">
+                    <button
+                      onClick={handleIncrease}
+                      className="flex-1 text-[#33A0FF] text-[24px]"
+                    >
                       +
                     </button>
                   </div>
-                  <button className="w-[164px] flex h-[42px] bg-[#FFD333] rounded-[5px] ml-[18.63px]">
+                  <button
+                    className="w-[164px] flex h-[42px] bg-[#FFD333] rounded-[5px] ml-[18.63px]"
+                    onClick={() => handleAddToCart()}
+                  >
                     <BsCartPlus className="ml-[29px] w-[15px] h-[15px] mt-[13px] text-[#212529]" />
                     <p className="w-[80px] h-[20px] font-roboto font-bold text-[16px] ml-[7px] mt-[8px]">
                       Add to cart
@@ -144,7 +200,14 @@ function ProductDetail() {
                 <div className="mt-[11.92px] h-[25px] font-roboto font-bold text-[16px] text-[#5A5A5A] leading-[18.75px] ">
                   <p>Rate:</p>
                 </div>
-                <StarRatings rating={rating} changeRating={changeRating} starHoverColor="#FFD333" starRatedColor="#FFD333" starDimension="20px" starSpacing="0"/>
+                <StarRatings
+                  rating={rating}
+                  changeRating={changeRating}
+                  starHoverColor="#FFD333"
+                  starRatedColor="#FFD333"
+                  starDimension="20px"
+                  starSpacing="0"
+                />
               </div>
             </div>
           </div>

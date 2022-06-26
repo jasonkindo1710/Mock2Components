@@ -13,7 +13,7 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import StarRatings from "react-star-ratings";
 import TopBar from "../Component/TopBar";
 import PaginationHome from "./PaginationHomepage";
-import NavTabs from "../Component/NavTabs"
+import NavTabs from "./NavTabs";
 
 function Productpage() {
   const [page, setPage] = useState(1);

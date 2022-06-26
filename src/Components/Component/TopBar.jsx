@@ -3,7 +3,7 @@ import { HiOutlineMenuAlt1 } from 'react-icons/hi'
 import { BiSearch } from 'react-icons/bi'
 import {MdOutlineShoppingCart } from 'react-icons/md'
 import { FiUser } from 'react-icons/fi'
-import Login from '../../Redux/Auth/AuthSlice'
+import Login from '../../Redux/Auth/reducer'
 import { Dropdown, Menu, Modal } from 'antd'
 import { AiOutlineLogin, AiOutlineUserAdd } from 'react-icons/ai'
 

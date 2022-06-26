@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import axios from '../../Api/axios'
 import { Modal } from "antd";
-import { loginSuccess } from "./AuthSlice";
+import { loginSuccess } from "./reducer";
 
 export const login = async (values, dispatch, nav) => {
   try {
