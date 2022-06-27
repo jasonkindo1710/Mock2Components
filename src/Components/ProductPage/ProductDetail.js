@@ -27,17 +27,22 @@ import {
   selectAuth,
   selectUserID,
 } from "../../Redux/Auth/selectors";
-import { addNewItemsToCart } from "../../Redux/Cart/actions";
+import { createNewCart, addNewItemToCart } from "../../Redux/Cart/actions";
+import { selectAllCart } from "../../Redux/Cart/selectors";
 
 function ProductDetail() {
   const [rating, setRating] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [flag, setFlag] = useState(false);
   const dispatch = useDispatch();
   const product = useSelector(selectSingleProduct);
   const auth = useSelector(selectAuth);
   const userID = useSelector(selectUserID);
   const accessToken = useSelector(selectAccessToken);
   const image = useSelector(selectImage);
+  const cart = useSelector(selectAllCart);
+  console.log(cart[0]?.data?.cart.id);
+
   const changeRating = (newRating) => {
     setRating(newRating);
   };
@@ -67,11 +72,23 @@ function ProductDetail() {
       cart: newCart,
       itemArr: newItemArr,
     };
-    console.log(item);
-    await addNewItemsToCart(accessToken, item, dispatch);
+    const cartItem = {
+      cartId: cart[0]?.data?.cart.id,
+      productId: product.id,
+      quantity: quantity,
+      price: product.price,
+      total: quantity * product.price,
+    };
+    if (cart.length == 0) {
+      await createNewCart(accessToken, item, dispatch);
+      setFlag(!flag);
+    } else if (cart.length >= 1) {
+      await addNewItemToCart(accessToken, cartItem, dispatch);
+      setFlag(!flag);
+    }
   };
   return (
-    <div>
+    <div className="absolute top-[170px]">
       <header>
         <TopBar />
       </header>

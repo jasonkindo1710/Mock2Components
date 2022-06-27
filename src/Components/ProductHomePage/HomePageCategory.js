@@ -27,7 +27,7 @@ function Productpage() {
   };
 
   return (
-    <div>
+    <div className="absolute top-[170px]">
       <header>
         <TopBar />
       </header>

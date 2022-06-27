@@ -2,6 +2,7 @@ import authReducer from "./Auth/reducer"
 import productReducer from "./Products/ProductSlice"
 import categoryReducer from "./Categories/reducer"
 import cartReducer from "./Cart/reducer"
+import orderReducer from "./Orders/reducer"
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import {
     persistStore,
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   product: productReducer,
   category: categoryReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  order: orderReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

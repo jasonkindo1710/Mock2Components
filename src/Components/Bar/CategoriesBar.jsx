@@ -33,7 +33,7 @@ const Categories = () => {
             <p className="text-[32px] ml-[20.04px] mb-0 text-[white] font-[700] leading-[36.8px]">Categories</p>
           </header>
           <ul className="items-center">
-            {allCategories.map((category) => {
+            {allCategories?.map((category) => {
               return (
                 <li key={category.name}>
                   <a className="categories-a" href="#" onClick={() => handleGetProducts(category)}>
