@@ -16,7 +16,7 @@ function ShoppingCart() {
 
 
 
-  let { total, quantity } = NewCart.data.items.reduce(
+  let { total, quantity } = NewCart?.data?.items.reduce(
     (cartTotal, cartItem) => {
       const { price, quantity } = cartItem;
       const itemTotal = price * quantity;

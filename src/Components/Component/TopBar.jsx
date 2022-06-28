@@ -15,6 +15,7 @@ import { selectAccessToken } from "../../Redux/Auth/selectors";
 const TopBar = () => {
   const onSearch = (value) => console.log(value);
   const [showModal, setShowModal] = useState(false);
+  const [flag, setFlag] = useState(false);
   const [modal, setModal] = useState(false)
   const menu = (
     <Menu
@@ -75,8 +76,9 @@ const TopBar = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    getCartById(accessToken, newCartId, dispatch)
-  }, [])
+    getCartById(accessToken, cart[0]?.data?.cart.id, dispatch)
+    setFlag(!flag)
+  }, [cart])
    console.log(newCart?.data?.items.length)
   
 
@@ -135,7 +137,7 @@ const TopBar = () => {
           {showModal && <Login />}
         </div>
       </div>
-      {modal &&  (
+      {modal && newCart?.data?.items.length >=1 ?  (
         <div className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50">
           <div
             className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]"
@@ -144,7 +146,22 @@ const TopBar = () => {
               <CartPopup />
             </div>
           </div>
-        </div>)}
+        </div>) : modal && (
+        <div 
+        onClick={toggleCartModal}
+        className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 ">
+          <div
+            className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]"
+            
+          >
+            <div className="absolute left-[950px] right-[177px] top-[8px] w-[360px]">
+                <div className="absolute w-[338px] h-[113px] bg-[#FFF9F9] rounded-[5px] shadow-empty text-center">
+                  <p className="h-[19px] w-[328px] mt-[45px]">Your shopping cart is empty!</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* ) : modal && (
         <div 
         onClick={toggleCartModal}

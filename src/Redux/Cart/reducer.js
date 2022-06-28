@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -13,14 +14,15 @@ const cartSlice = createSlice({
     createNewCartSuccess: (state, action) => {
       state.status = "success";
       state.cartItems.push(action.payload);
+      
     },
     createNewCartFailed: (state) => {
       state.status = "rejected";
     },
     addToCartSuccess: (state, action) => {
       state.cartItems.push(action.payload);   
-      
       state.status = "success";
+      
     },
     addToCartFailed: (state) => {
       state.status = "rejected";
@@ -37,6 +39,12 @@ const cartSlice = createSlice({
         (newCartItem) => newCartItem.id !== action.payload.id
       );
       state.newCart = nextCartItems;
+      toast.success(`item deleted from cart` , {
+        position: "bottom-left"
+      })
+      console.log(action.payload)
+      
+      console.log(current(state.newCart))
       state.status = "success";
     },
     deleteItemFailed: (state) => {

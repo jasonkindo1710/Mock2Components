@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
 import Login from "./Components/LoginPage/Login"
 import Homepage from "./Components/ProductHomePage/HomePageAll"
 import Productpage from './Components/ProductHomePage/HomePageCategory';
@@ -12,6 +14,7 @@ import SuccessPage from './Components/CartCheckout/SuccessPage';
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/productpage" element={<Productpage/>} />

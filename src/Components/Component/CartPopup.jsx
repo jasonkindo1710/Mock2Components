@@ -28,6 +28,7 @@ const CartPopup = () => {
   }, []);
   const handleDeleteItem = async (id) => {
     await deleteItemById(accessToken, id , dispatch);
+    getCartById(accessToken, cartId, dispatch);
     setFlag(!flag)
   };
   

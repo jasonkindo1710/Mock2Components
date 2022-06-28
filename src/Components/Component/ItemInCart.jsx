@@ -2,22 +2,28 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../../Assets/ProductPhoto.svg"
 import { selectAccessToken } from "../../Redux/Auth/selectors";
-import { deleteItemById } from "../../Redux/Cart/actions";
+import { deleteItemById, getCartById } from "../../Redux/Cart/actions";
 import { decreaseCart, increaseCart } from "../../Redux/Cart/reducer";
-import { selectNewCart } from "../../Redux/Cart/selectors";
+import { selectNewCart, selectAllCart } from "../../Redux/Cart/selectors";
+
 const ItemInCart = () => {
     const card = useSelector(selectNewCart);
+    const newCart = useSelector(selectAllCart);
+    const cartId = newCart[0]?.data?.cart.id;
     const accessToken = useSelector(selectAccessToken)
     console.log(card.data.items)
     const dispatch = useDispatch()
     const handleDecrease = (cartItem) => {
         dispatch(decreaseCart(cartItem))
+        
+        
     }
     const handleIncrease = (cartItem) => {
         dispatch(increaseCart(cartItem))
     }
-    const handleDelete = (id) => {
-        deleteItemById(accessToken, id, dispatch)
+    const handleDelete = async (id) => {
+        await deleteItemById(accessToken, id, dispatch)
+        getCartById(accessToken, cartId, dispatch);
     }
     return ( 
         <div className="w-[1151px] h-[full] rounded-[5px] bg-[#FFFFFF] border border-solid border-[#5A5A5A69]">

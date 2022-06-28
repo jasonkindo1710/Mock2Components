@@ -36,7 +36,7 @@ function ProductDetail() {
   const image = useSelector(selectImage);
   const cart = useSelector(selectAllCart);
   const newCartId = useSelector(selectNewCartId)
-  console.log(cart[0]?.data?.cart.id);
+  // console.log(cart[0]?.data?.cart.id);
 
 
   const changeRating = (newRating) => {
@@ -80,6 +80,7 @@ function ProductDetail() {
     };
     if (cart.length == 0) {
       await createNewCart(accessToken, item, dispatch);
+      getCartById(accessToken, cart[0]?.data?.cart.id, dispatch)
       setFlag(!flag);
     } else if (cart.length >= 1) {
       await addNewItemToCart(accessToken, cartItem, dispatch);

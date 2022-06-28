@@ -11,6 +11,7 @@ import {
   deleteItemFailed,
   deleteItemSuccess
 } from "./reducer";
+import { toast } from "react-toastify";
 
 export const createNewCart = async (accessToken, item, dispatch) => {
   try {
@@ -18,6 +19,9 @@ export const createNewCart = async (accessToken, item, dispatch) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     dispatch(createNewCartSuccess(res.data));
+    toast.success("Created new cart", {
+      position: "bottom-left"
+    })
   } catch (err) {
     dispatch(createNewCartFailed());
   }
@@ -28,6 +32,9 @@ export const addNewItemToCart = async (accessToken, item, dispatch) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     dispatch(addToCartSuccess(res.data));
+    toast.success("Item added to cart", {
+      position: "bottom-left"
+    })
   } catch (err) {
     dispatch(addToCartFailed());
   }

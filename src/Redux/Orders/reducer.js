@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const orderSlice = createSlice({
     name: "order",
@@ -10,6 +11,9 @@ const orderSlice = createSlice({
         createOrderSuccess: (state, action) => {
             state.status = "success";
             state.orderList.push(action.payload)
+            toast.success(`New order was created successfully` , {
+                position: "bottom-left"
+              })
         },
         createOrderFailed: (state) => {
             state.status = "failed"

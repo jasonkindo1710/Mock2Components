@@ -11,7 +11,6 @@ export const createNewOrder = async (accessToken, order, dispatch, navigate) => 
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       dispatch(createOrderSuccess(res.data));
-      message.success("Order has been created successfully")
       navigate('/success')
 
     } catch (error) {
