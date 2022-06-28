@@ -1,17 +1,21 @@
 import axios from "../../Api/axios";
 import { createOrderFailed, createOrderSuccess, viewOrderFailed, viewOrderSuccess } from "./reducer";
 import { message } from "antd";
-export const createNewOrder = async (accessToken, order, dispatch) => {
+import { useNavigate } from "react-router-dom";
+
+
+export const createNewOrder = async (accessToken, order, dispatch, navigate) => {
     try {
+      
       const res = await axios.post("/v1/orders", order, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       dispatch(createOrderSuccess(res.data));
-      message.success = "Order has been created successfully"
+      message.success("Order has been created successfully")
+      navigate('/success')
 
     } catch (error) {
       dispatch(createOrderFailed())
-
     }
   };
 

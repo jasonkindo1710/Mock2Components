@@ -6,16 +6,10 @@ import WriteReview from "../Component/WriteReview";
 import RelatedProducts from "../Component/RelatedProduct";
 import { BsCartPlus } from "react-icons/bs";
 import Rating from "../Component/Rating";
-import pic1 from "../../Assets/pic1.png";
-import pic2 from "../../Assets/pic2.png";
-import pic3 from "../../Assets/pic3.png";
-import pic4 from "../../Assets/pic4.png";
-import pic5 from "../../Assets/pic5.png";
-import pic6 from "../../Assets/pic6.png";
-import Stars from "../Component/Stars";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState,  } from "react";
 import {
   selectImage,
   selectSingleProduct,
@@ -27,8 +21,8 @@ import {
   selectAuth,
   selectUserID,
 } from "../../Redux/Auth/selectors";
-import { createNewCart, addNewItemToCart } from "../../Redux/Cart/actions";
-import { selectAllCart } from "../../Redux/Cart/selectors";
+import { createNewCart, addNewItemToCart, getCartById } from "../../Redux/Cart/actions";
+import { selectAllCart, selectNewCartId } from "../../Redux/Cart/selectors";
 
 function ProductDetail() {
   const [rating, setRating] = useState(0);
@@ -41,7 +35,9 @@ function ProductDetail() {
   const accessToken = useSelector(selectAccessToken);
   const image = useSelector(selectImage);
   const cart = useSelector(selectAllCart);
+  const newCartId = useSelector(selectNewCartId)
   console.log(cart[0]?.data?.cart.id);
+
 
   const changeRating = (newRating) => {
     setRating(newRating);
@@ -52,6 +48,9 @@ function ProductDetail() {
       setQuantity(1);
     }
   };
+  useEffect(() => {
+    getCartById(accessToken, newCartId, dispatch)
+  }, [])
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };

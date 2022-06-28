@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { selectAccessToken, selectUserID } from "../../Redux/Auth/selectors";
 import { selectNewCart } from "../../Redux/Cart/selectors";
 import { createNewOrder } from "../../Redux/Orders/actions";
@@ -14,6 +15,7 @@ function Checkout() {
   console.log(orderList)
   const dispatch = useDispatch();
   console.log(card.data.items);
+  const navigate = useNavigate()
   const cardLength = card?.data?.items.length;
   const shipping = cardLength * 10;
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -58,7 +60,9 @@ function Checkout() {
       order: newOrder,
       itemArr: newItemArr,
     };
-    await createNewOrder(accessToken, orderCheckOut, dispatch);
+    
+    await createNewOrder(accessToken, orderCheckOut, dispatch, navigate);
+    
   };
   return (
     <div className="absolute top-[155px]">

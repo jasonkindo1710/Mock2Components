@@ -7,6 +7,7 @@ import ProductDetail from './Components/ProductPage/ProductDetail';
 import ShoppingCart from './Components/CartCheckout/ShoppingCart';
 import Checkout from './Components/CartCheckout/Checkout';
 import Main from './Components/HomePage/Main'
+import SuccessPage from './Components/CartCheckout/SuccessPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/productdetail' element={<ProductDetail />} />
         <Route path='/shoppingcart' element={<ShoppingCart />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/success' element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>
   );

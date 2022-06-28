@@ -1,7 +1,7 @@
 import Product from "../../Assets/ProductPhoto.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllCart, selectNewCart } from "../../Redux/Cart/selectors";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   deleteItemById,
   deleteCart,
@@ -18,17 +18,19 @@ const CartPopup = () => {
   const cart = useSelector(selectNewCart);
   const newCart = useSelector(selectAllCart);
 
+  const ref = useRef(0)
   const cartId = newCart[0]?.data?.cart.id;
      const cardIdNew = cart?.id;
+  
   useEffect(() => {
-    getCartById(accessToken, cartId, dispatch);
+   getCartById(accessToken, cartId, dispatch);
     setFlag(!flag);
   }, []);
-
   const handleDeleteItem = async (id) => {
-    await deleteItemById(accessToken, id, dispatch);
-    setFlag(!flag);
+    await deleteItemById(accessToken, id , dispatch);
+    setFlag(!flag)
   };
+  
   const handleViewCart = () => {
     navigate('/shoppingcart')
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -7,8 +7,11 @@ import Login from "../../Redux/Auth/reducer";
 import { Dropdown, Menu, Modal } from "antd";
 import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai";
 import CartPopup from "./CartPopup";
-import { selectAllCart, selectNewCart } from "../../Redux/Cart/selectors";
-import { useSelector } from "react-redux";
+import { selectAllCart, selectNewCart, selectNewCartId } from "../../Redux/Cart/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartById } from "../../Redux/Cart/actions";
+import { selectAccessToken } from "../../Redux/Auth/selectors";
+
 const TopBar = () => {
   const onSearch = (value) => console.log(value);
   const [showModal, setShowModal] = useState(false);
@@ -64,8 +67,17 @@ const TopBar = () => {
   };
   const newCart = useSelector(selectNewCart)
   const cart = useSelector(selectAllCart);
-  console.log(cart)
-  console.log(newCart?.data?.items.length)
+  
+  // console.log(cart.length)
+ 
+  const accessToken = useSelector(selectAccessToken)
+  const newCartId = useSelector(selectNewCartId)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    getCartById(accessToken, newCartId, dispatch)
+  }, [])
+   console.log(newCart?.data?.items.length)
   
 
   return (
@@ -123,7 +135,7 @@ const TopBar = () => {
           {showModal && <Login />}
         </div>
       </div>
-      {modal && (
+      {modal &&  (
         <div className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50">
           <div
             className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]"

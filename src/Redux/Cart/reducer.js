@@ -18,19 +18,8 @@ const cartSlice = createSlice({
       state.status = "rejected";
     },
     addToCartSuccess: (state, action) => {
-      state.cartItems.push(action.payload);
-      console.log(current(state.newCart));
-      // state.cartItems = [...state.newCart, state.cartItems.push(action.payload) ]
-      //   const itemIndex = state.cartItems.findIndex(
-      //     (item) => item.id === action.payload.id
-      //   );
-      //   if (itemIndex >= 0) {
-      //     state.cartItems[itemIndex].cartQuantity += 1;
-      //   } else {
-      //     const tempProduct = { ...action.payload, cartQuantity: 1 };
-      //     state.cartItems.push(tempProduct);
-      //   }
-
+      state.cartItems.push(action.payload);   
+      
       state.status = "success";
     },
     addToCartFailed: (state) => {
@@ -48,10 +37,9 @@ const cartSlice = createSlice({
         (newCartItem) => newCartItem.id !== action.payload.id
       );
       state.newCart = nextCartItems;
-      console.log(current(state.newCart));
       state.status = "success";
     },
-    deleteItemFailed: (state, action) => {
+    deleteItemFailed: (state) => {
       state.status = "rejected";
     },
     decreaseCart: (state, action) => {
@@ -73,6 +61,7 @@ const cartSlice = createSlice({
     },
    
     deleteCartSuccess: (state, action) => {
+      state.cartItems = [];
       state.newCart = [];
       state.status = "success";
     },
