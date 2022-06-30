@@ -10,6 +10,8 @@ import ShoppingCart from './Components/CartCheckout/ShoppingCart';
 import Checkout from './Components/CartCheckout/Checkout';
 import Main from './Components/HomePage/Main'
 import SuccessPage from './Components/CartCheckout/SuccessPage';
+import OrderList from './Components/AdminPage/OrderList';
+import OrderDetail from './Components/AdminPage/OrderDetail';
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
         <Route path='/shoppingcart' element={<ShoppingCart />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/success' element={<SuccessPage />} />
+        {/* Admin */}
+        <Route path='/admin/order' element={<OrderList />} />
+        <Route path='/admin/order/orderdetail' element={<OrderDetail />} />
+
       </Routes>
     </BrowserRouter>
   );

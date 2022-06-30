@@ -11,7 +11,7 @@ export const login = async (values, dispatch, nav) => {
       deviceId: values.deviceId,
     });
     dispatch(loginSuccess(data));
-    nav("/");
+    nav("/admin/order");
     Modal.success({
       title: "Login success",
     });

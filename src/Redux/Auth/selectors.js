@@ -10,3 +10,6 @@ export const selectAccessToken = createSelector(
 export const selectUserID = createSelector(
     [selectAuth], (authSlice) => authSlice?.auth?.data?.user.id
 )
+export const selectUserRole = createSelector(
+    [selectAuth], (authSlice) => authSlice?.auth?.data?.user.role
+)

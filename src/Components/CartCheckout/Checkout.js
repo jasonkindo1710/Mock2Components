@@ -20,6 +20,7 @@ function Checkout() {
   const shipping = cardLength * 10;
   const [paymentMethod, setPaymentMethod] = useState("");
   console.log(paymentMethod);
+  //checkout thêm edit
   const [address, setAddress] = useState(
     "Random Federation 115302, Moscow ul. Varshavskaya, 15-2-178"
   );
