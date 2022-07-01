@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { HiOutlineMenuAlt1 } from 'react-icons/hi'
 import { IoIosArrowForward } from 'react-icons/io'
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories} from "../../Redux/Categories/actions";
-import { getProducts } from "../../Redux/Products/ApiRequest";
-import { selectAllCategories } from "../../Redux/Categories/selectors";
+import { getCategories} from "../../Redux/Products/actions";
+import { getProducts } from "../../Redux/Products/actions";
+import { selectAllCategories } from "../../Redux/Products/selectors";
 import { selectAllProducts } from "../../Redux/Products/selectors";
 import { useNavigate } from "react-router-dom";
 

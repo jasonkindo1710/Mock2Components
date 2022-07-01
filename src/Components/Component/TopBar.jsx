@@ -79,7 +79,7 @@ const TopBar = () => {
     getCartById(accessToken, cart[0]?.data?.cart.id, dispatch)
     setFlag(!flag)
   }, [cart])
-   console.log(newCart?.data?.items.length)
+  //  console.log(newCart?.data?.items.length)
   
 
   return (

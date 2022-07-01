@@ -4,39 +4,38 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { selectAllProducts } from "../../Redux/Products/selectors";
-import {
-  getAllProducts,
-  getSingleProduct,
-} from "../../Redux/Products/ApiRequest";
+import { getAllProducts, getSingleProduct } from "../../Redux/Products/actions";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import StarRatings from "react-star-ratings";
 import TopBar from "../Component/TopBar";
 import PaginationHome from "./PaginationHomepage";
-import NavTabs from "../Component/NavTabs"
+import NavTabs from "./NavTabs";
 
-function Homepage() {
+function Productpage() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector(selectAllProducts);
+  console.log(products);
 
   const handleClick = async (id) => {
     await getSingleProduct(dispatch, id);
     navigate("/productdetail");
   };
 
-  useEffect(() => {
-    getAllProducts(dispatch, page);
-  }, []);
-
   return (
-    <div>
+    <div className="absolute top-[155px]">
       <header>
         <TopBar />
       </header>
       <NavTabs />
-      <div className="w-[1440px] grid grid-cols-4 gap-4 my-[20px] mx-auto ">
+      <div className="ml-[20px] mt-[40px]">
+        <p className="font-bold font-sans text-[32px]">
+          {products.length} Results for "{products[0].category}"
+        </p>
+      </div>
+      <div className="w-[1440px] grid grid-cols-4 gap-4 my-[20px] mx-[20px] ">
         {products?.map((product) => (
           <div
             key={product.id}
@@ -60,7 +59,12 @@ function Homepage() {
                 </p>
               </div>
               <div className="flex h-[18px] mb-[10px]">
-                <StarRatings rating={parseInt(product.rating)} starRatedColor="#FFD333" starDimension="20px" starSpacing="0" />
+                <StarRatings
+                  rating={parseInt(product.rating)}
+                  starRatedColor="#FFD333"
+                  starDimension="20px"
+                  starSpacing="0"
+                />
                 <p className="text-[#D70000] ml-[69px] mt-[-3px] font-sans text-[16px] font-semibold">
                   50% Off
                 </p>
@@ -92,4 +96,4 @@ function Homepage() {
   );
 }
 
-export default Homepage;
+export default Productpage;

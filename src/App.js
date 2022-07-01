@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import Login from "./Components/LoginPage/Login"
-import Homepage from "./Components/ProductHomePage/HomePageAll"
-import Productpage from './Components/ProductHomePage/HomePageCategory';
+
+import Productpage from './Components/ProductHomePage/ProductPageCategory';
 import ProductDetail from './Components/ProductPage/ProductDetail';
 import ShoppingCart from './Components/CartCheckout/ShoppingCart';
 import Checkout from './Components/CartCheckout/Checkout';
@@ -20,7 +20,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/productpage" element={<Productpage/>} />
-        <Route path="/homepage" element={<Homepage/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/productdetail' element={<ProductDetail />} />
         <Route path='/shoppingcart' element={<ShoppingCart />} />

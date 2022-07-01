@@ -19,6 +19,9 @@ const orderSlice = createSlice({
     },
     createOrderFailed: (state) => {
       state.status = "failed";
+      toast.error(`Please check again your contact information and try again!`, {
+        position: "bottom-left",
+      });
     },
     viewOrderSuccess: (state) => {
       state.status = "success";

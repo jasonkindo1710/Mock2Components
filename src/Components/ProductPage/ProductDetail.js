@@ -13,6 +13,7 @@ import { useEffect, useState,  } from "react";
 import {
   selectImage,
   selectSingleProduct,
+  selectSingleProductReview,
 } from "../../Redux/Products/selectors";
 import StarRatings from "react-star-ratings";
 import NavTabs from "./NavTabs";
@@ -23,6 +24,7 @@ import {
 } from "../../Redux/Auth/selectors";
 import { createNewCart, addNewItemToCart, getCartById } from "../../Redux/Cart/actions";
 import { selectAllCart, selectNewCartId } from "../../Redux/Cart/selectors";
+import { getSingleProduct } from "../../Redux/Products/actions";
 
 function ProductDetail() {
   const [rating, setRating] = useState(0);
@@ -30,6 +32,7 @@ function ProductDetail() {
   const [flag, setFlag] = useState(false);
   const dispatch = useDispatch();
   const product = useSelector(selectSingleProduct);
+  
   const auth = useSelector(selectAuth);
   const userID = useSelector(selectUserID);
   const accessToken = useSelector(selectAccessToken);
@@ -37,7 +40,8 @@ function ProductDetail() {
   const cart = useSelector(selectAllCart);
   const newCartId = useSelector(selectNewCartId)
   // console.log(cart[0]?.data?.cart.id);
-
+  const review = useSelector(selectSingleProductReview);
+  
 
   const changeRating = (newRating) => {
     setRating(newRating);
@@ -51,6 +55,11 @@ function ProductDetail() {
   useEffect(() => {
     getCartById(accessToken, newCartId, dispatch)
   }, [])
+
+  useEffect(() => {
+    getSingleProduct(dispatch, product.id)
+
+  }, [flag])
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
@@ -88,13 +97,13 @@ function ProductDetail() {
     }
   };
   return (
-    <div className="absolute top-[170px]">
+    <div className="absolute top-[155px]">
       <header>
         <TopBar />
       </header>
       <div>
         <NavTabs />
-        <div className="w-[1439px] h-[612px] relative flex bg-[#FFFDFD] mx-auto">
+        <div className="w-[1439px] h-[612px] relative flex bg-[#FFFDFD] my-[20px] mx-auto">
           <div className="absolute left-[143px] top-[12px] flex flex-col">
             <div>
               <img
@@ -232,7 +241,7 @@ function ProductDetail() {
 
         <ProductDetailBar />
         <Review />
-        <WriteReview />
+        <WriteReview flag={flag} setFlag={setFlag}/>
         <RelatedProducts />
       </div>
     </div>

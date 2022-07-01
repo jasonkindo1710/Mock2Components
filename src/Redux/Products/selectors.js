@@ -12,6 +12,9 @@ export const selectAllProducts = createSelector(
 export const selectSingleProduct = createSelector(
     [selectProduct], (productSlice) => productSlice?.product?.data?.product
 )
+export const selectSingleProductReview = createSelector(
+    [selectProduct], (productSlice) => productSlice?.product?.data?.reviews?.result
+)
 
 export const selectImage = createSelector(
     [selectProduct], (productSlice) => productSlice?.product?.data?.product.images[0]
@@ -23,3 +26,5 @@ export const selectRating = createSelector(
 export const selectReviews = createSelector(
     [selectProduct], (productSlice) => productSlice?.product?.data?.reviews.total
 )
+
+export const selectAllCategories = (state) => state.product?.allCategories?.data

@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories } from "../../Redux/Categories/actions";
-import { selectAllCategories } from "../../Redux/Categories/selectors";
+import { getCategories } from "../../Redux/Products/actions";
 import { selectAllProducts } from "../../Redux/Products/selectors";
 const NavTabs = () => {
   const dispatch = useDispatch()
@@ -14,13 +13,11 @@ const NavTabs = () => {
   const category = products[0].category
   
   return (
-    <div className="w-[1440px] h-[50px] bg-[#FFFBFB] relative mx-auto">
+    <div className="w-[1440px] h-[50px] bg-[#FFFBFB] relative">
       <div className="absolute top-[14px] left-[159px]  flex ">
         <p className="title-navtab w-[42px]">Home</p>
         <RiArrowRightSLine size={20} color="#6C757D" className="ml-[4.5px] mt-[2px]" />
         <p className="title-navtab w-[70px] ml-[4.5px]">{category}</p>
-        {/* <RiArrowRightSLine size={20} color="#6C757D" className="ml-[4.5px] mt-[2px]" />
-        <p className="title-navtab w-[100px] ml-[4.5px]">Adidas Shoes</p> */}
       </div>
     </div>
   );

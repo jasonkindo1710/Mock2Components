@@ -1,3 +1,4 @@
+import { Modal, Form, Input, Button } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,19 +13,21 @@ function Checkout() {
   const card = useSelector(selectNewCart);
   const accessToken = useSelector(selectAccessToken);
   const orderList = useSelector(selectAllOrder);
-  console.log(orderList)
+  const [isEditing, setIsEditing] = useState(false);
+
   const dispatch = useDispatch();
-  console.log(card.data.items);
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const cardLength = card?.data?.items.length;
   const shipping = cardLength * 10;
   const [paymentMethod, setPaymentMethod] = useState("");
-  console.log(paymentMethod);
+
   //checkout thêm edit
   const [address, setAddress] = useState(
     "Random Federation 115302, Moscow ul. Varshavskaya, 15-2-178"
   );
   const [contact, setContact] = useState("0326174848");
+  const [email, setEmail] = useState("stroyka@example.com");
   const userID = useSelector(selectUserID);
   let { total, quantity } = card.data.items.reduce(
     (cartTotal, cartItem) => {
@@ -50,20 +53,18 @@ function Checkout() {
       totalPrice: total + shipping,
       userId: userID,
     };
-    const newItemArr = 
-      card.data.items.map((item) => ({
-        productId: item.itemCartInfo.id,
-        quantity: item.quantity,
-        price: item.price,
-        total: item.quantity * item.price,
-      }));
+    const newItemArr = card.data.items.map((item) => ({
+      productId: item.itemCartInfo.id,
+      quantity: item.quantity,
+      price: item.price,
+      total: item.quantity * item.price,
+    }));
     const orderCheckOut = {
       order: newOrder,
       itemArr: newItemArr,
     };
-    
+
     await createNewOrder(accessToken, orderCheckOut, dispatch, navigate);
-    
   };
   return (
     <div className="absolute top-[155px]">
@@ -140,10 +141,10 @@ function Checkout() {
                         Email Address
                       </p>
                       <p className="w-[109.42px] h-[16px] font-roboto text-[14px] mt-[-10px] leading-[16.41px]">
-                        stroyka@example.com
+                        {email}
                       </p>
                     </div>
-                    <button className="mt-[0px] text-[#2E8ADA] w-[132px] h-[16px] leading-[16.41px] text-left">
+                    <button onClick={() => setIsEditing(true)} className="mt-[0px] text-[#2E8ADA] w-[132px] h-[16px] leading-[16.41px] text-left">
                       Edit Address
                     </button>
                   </div>
@@ -230,9 +231,10 @@ function Checkout() {
                         </p>
                       </div>
                     </form>
-                    <button 
-                    onClick={() => handleCheckOut()}
-                    className="w-[300px] h-[35px] bg-[#FFD333] ml-[20px] mt-[12px] rounded-[5px] text-center font-bold font-roboto text-[24px] leading-[28px] relative">
+                    <button
+                      onClick={() => handleCheckOut()}
+                      className="w-[300px] h-[35px] bg-[#FFD333] ml-[20px] mt-[12px] rounded-[5px] text-center font-bold font-roboto text-[24px] leading-[28px] relative"
+                    >
                       <p className="w-[106px] h-[25px] absolute left-[98px] top-[3px]">
                         Checkout
                       </p>
@@ -240,6 +242,67 @@ function Checkout() {
                   </div>
                 </div>
               </div>
+              <Modal
+                title="Edit Shipping Information"
+                visible={isEditing}
+                footer={null}
+                closable={false}
+              >
+                <Form >
+                  <Form.Item
+                    label="Address:"
+                    name="address"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your address!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      placeholder="address"
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="contact:"
+                    name="contact"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your contact!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      placeholder="contact"
+                      onChange={(e) => setContact(e.target.value)}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Email:"
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your email!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      placeholder="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Item>
+                 
+                  <Form.Item>
+                    <div className="btn_list">
+                      <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+                      <Button onClick={() => setIsEditing(false)} htmlType="submit">Save</Button>
+                    </div>
+                  </Form.Item>
+                </Form>
+              </Modal>
             </div>
           </div>
         </div>

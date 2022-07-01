@@ -42,7 +42,7 @@ function OrderDetail() {
   };
 
   return (
-    <div className="h-[full] w-[1217px] bg-[#F5F7FA] relative">
+    <div className="h-[120vh] w-[1217px] bg-[#F5F7FA] relative">
       <div className="absolute left-[32px] top-[25px]">
         <div className="w-[300px] h-[18px] text-[18px] leading-[20.7px] text-[#929395]">
           <p>Dashboard / Order / Order #{order.order.id}</p>
@@ -53,7 +53,7 @@ function OrderDetail() {
         <div className="w-[116px] h-[19px] text-[16px] text-[#929395] leading-[18.77px] font-sans font-medium mt-[15px]">
           <p>Order ID: #{order.order.id}</p>
         </div>
-        <div className="mt-[25px] w-[1146px] h-[900px] bg-[#FFFFFF] shadow-image relative">
+        <div className="mt-[25px] w-[1146px] h-[calc(100vh-500px)] bg-[#FFFFFF] shadow-image relative">
           <div className="absolute top-[15px] left-[20px] flex flex-col">
             <div className="flex items-center h-[35px]">
               <BiCalendarAlt className="w-[25px] h-[25px]" />
@@ -85,10 +85,11 @@ function OrderDetail() {
                   .join("/")}
               </p>
               <div className="flex ml-[410px]">
-                <select
+              <div className="font-work text-[18px] font-medium leading-[21.11px] w-[193px] h-[40px] rounded-[2px] ">
+              <select
                   defaultValue={order.order.status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="font-work text-[18px] font-medium leading-[21.11px] w-[193px] h-[40px] border border-solid border-[#929395] rounded-[2px] "
+                  className="w-[193px] h-[40px] border border-solid border-[#929395] rounded-[2px]"
                 >
                   <option value="Processing" className="">
                     Processing
@@ -100,10 +101,12 @@ function OrderDetail() {
                     Cancel
                   </option>
                 </select>
-                <select
+              </div>
+              <div className="font-work text-[18px] font-medium leading-[21.11px] w-[106px] h-[40px] rounded-[2px] ml-[28px]">
+              <select
                   defaultValue={order.order.isPaid === true ? "Yes" : "No"}
                   onChange={(e) => setIsPaid(e.target.value)}
-                  className="font-work text-[18px] font-medium leading-[21.11px] w-[106px] h-[40px] border border-solid border-[#929395] rounded-[2px] ml-[28px]"
+                  className="w-[106px] h-[40px] border border-solid border-[#929395] rounded-[2px] "
                 >
                   <option value={false} className="">
                     No
@@ -112,6 +115,9 @@ function OrderDetail() {
                     Yes
                   </option>
                 </select>
+              </div>
+                
+                
                 <button
                   onClick={() => handleUpdateOrder()}
                   className="w-[147px] h-[40px] bg-[#FFD333] rounded-[5px] ml-[32px] text-center text-[20px] font-work font-semibold "
@@ -141,17 +147,17 @@ function OrderDetail() {
                     Customer
                   </p>
                   <p className="w-[210px] h-[15px] font-work text-[16px] text-[#3D464D] leading-[18.77px]">
-                    Name: {user.username}
+                    Name: {user?.username}
                   </p>
-                  <p className="w-[220px] h-[15px] font-work text-[16px] text-[#3D464D] leading-[18.77px]">
-                    Email: {user.email}
+                  <p className="w-[260px] h-[15px] font-work text-[16px] text-[#3D464D] leading-[18.77px]">
+                    Email: {user?.email}
                   </p>
                   <p className="w-[210px] h-[15px] font-work text-[16px] text-[#3D464D] leading-[18.77px]">
                     Phone: {order.order.contact}
                   </p>
                 </div>
               </div>
-              <div className="flex ml-[53px]">
+              <div className="flex ml-[33px]">
                 <div className="w-[75px] h-[75px] rounded-full bg-[#3D464D] flex justify-center">
                   <FiTruck
                     className="w-[28px] h-[28px] my-[auto]"
@@ -173,7 +179,7 @@ function OrderDetail() {
                   </p>
                 </div>
               </div>
-              <div className="flex ml-[53px]">
+              <div className="flex ml-[33px]">
                 <div className="w-[75px] h-[75px] rounded-full bg-[#3D464D] flex justify-center">
                   <HiOutlineLocationMarker
                     className="w-[28px] h-[28px] my-[auto]"
@@ -197,7 +203,7 @@ function OrderDetail() {
               </div>
             </div>
           </div>
-          <div className="absolute top-[325px] w-[1144px] h-[462px] shadow-image bg-[#FFFFFF] border border-solid border-[#929395]">
+          <div className="absolute top-[325px] w-[1145px] h-[calc(100vh-390px)] shadow-image bg-[#FFFFFF] ">
             <div className="h-[52px] border-b border-[#929395]">
               <div className="absolute top-[10px] left-[23px] font-work font-bold text-[22px]">
                 Items

@@ -64,7 +64,7 @@ function OrderList() {
   };
 
   return (
-    <div className="h-full w-[1217px] bg-[#F5F7FA] relative">
+    <div className="h-[1000px] w-[1217px] bg-[#F5F7FA] relative">
       <div className="absolute left-[32px] top-[25px]">
         <div className="w-[226px] h-[18px] text-[18px] leading-[20.7px] text-[#929395]">
           <p>Dashboard / Order</p>
@@ -72,7 +72,7 @@ function OrderList() {
         <div className="w-[226px] h-[31px] text-[35px] leading-[41.06px] font-semibold mt-[31px]">
           <p>Orders</p>
         </div>
-        <div className="w-[1153px] min-h-[1500px] max-h-[2000px] bg-[#FFFFFF] shadow-md border border-solid border-[black] mt-[31px] relative">
+        <div className="w-[1153px] min-h-[1000px] max-h-[2000px] bg-[#FFFFFF] shadow-md border border-solid border-[black] mt-[31px] relative">
           <div className="absolute left-[30px] top-[43.92px] w-[1093px] h-[51.08px] border-[1.5px] border-[#C4C4C4]">
             <div className=" flex ">
               <IoMdSearch
@@ -92,7 +92,7 @@ function OrderList() {
             <table className="w-[1153px] table-auto">
               <tbody>
                 <tr className="h-[84px] ">
-                  <th className="w-[60px] h-[20px] font-bold text-[20px] leading-[23px]">
+                  <th className="w-[80px] h-[20px] font-bold text-[20px] leading-[23px]">
                     <div className="flex justify-center">
                       <p className="my-auto">ID</p>
                       <FaSort
