@@ -260,7 +260,7 @@ function Checkout() {
                     ]}
                   >
                     <Input
-                      placeholder="address"
+                      placeholder={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
                   </Form.Item>
@@ -275,7 +275,7 @@ function Checkout() {
                     ]}
                   >
                     <Input
-                      placeholder="contact"
+                      placeholder={contact}
                       onChange={(e) => setContact(e.target.value)}
                     />
                   </Form.Item>
@@ -290,7 +290,7 @@ function Checkout() {
                     ]}
                   >
                     <Input
-                      placeholder="email"
+                      placeholder={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Item>

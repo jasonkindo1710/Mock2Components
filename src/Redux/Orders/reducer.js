@@ -48,6 +48,10 @@ const orderSlice = createSlice({
       toast.success(`Order was updated successfully`, {
         position: "bottom-left",
       });
+    },
+    getOrderSuccess: (state, action) => {
+      state.order = action.payload;
+      state.status = "success";
     }
   },
 });
@@ -60,6 +64,7 @@ export const {
   getAllOrderSuccess,
   getOrderByIdFailed,
   getOrderByIdSuccess, 
-  updateOrderSuccess
+  updateOrderSuccess,
+  getOrderSuccess
 } = orderSlice.actions;
 export default orderSlice.reducer;

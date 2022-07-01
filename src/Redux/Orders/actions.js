@@ -9,6 +9,7 @@ import {
   getOrderByIdSuccess,
   getOrderByIdFailed,
   updateOrderSuccess,
+  getOrderSuccess,
 } from "./reducer";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -73,3 +74,15 @@ export const updateOrderById = async (accessToken, id, updated, dispatch) => {
     console.log(err);
   }
 };
+
+export const getMyOrder = async (accessToken, dispatch,page) => {
+  try {
+    const res = await axios.get(`/v1/orders/my-orders?page=${page}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+    dispatch(getOrderSuccess(res.data))
+  }
+  catch(err) {
+    console.log(err)
+  }
+}
