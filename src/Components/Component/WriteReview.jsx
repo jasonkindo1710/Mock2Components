@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { selectAccessToken } from "../../Redux/Auth/selectors";
-import { createReviewForProduct } from "../../Redux/Products/actions";
-import { selectSingleProduct } from "../../Redux/Products/selectors";
+import { createReviewForProduct } from "../../Redux/Product/actions";
+import { selectSingleProduct } from "../../Redux/Product/selectors";
 
 const WriteReview = ({flag, setFlag}) => {
   const [rating, setRating] = useState(0);

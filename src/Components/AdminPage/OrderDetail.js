@@ -16,6 +16,8 @@ import { selectOrderById } from "../../Redux/Orders/selectors";
 import { getUserById } from "../../Redux/User/actions";
 import { selectUserById } from "../../Redux/User/selectors";
 import { updateOrderById } from "../../Redux/Orders/actions";
+import dropdown from "../Component/dropdown";
+import Dropdown from "../Component/dropdown";
 
 function OrderDetail() {
   const accessToken = useSelector(selectAccessToken);
@@ -43,6 +45,7 @@ function OrderDetail() {
 
   return (
     <div className="h-[120vh] w-[1217px] bg-[#F5F7FA] relative">
+      {/* <Dropdown/> */}
       <div className="absolute left-[32px] top-[25px]">
         <div className="w-[300px] h-[18px] text-[18px] leading-[20.7px] text-[#929395]">
           <p>Dashboard / Order / Order #{order.order.id}</p>
@@ -203,7 +206,7 @@ function OrderDetail() {
               </div>
             </div>
           </div>
-          <div className="absolute top-[325px] w-[1145px] h-[calc(100vh-390px)] shadow-image bg-[#FFFFFF] ">
+          <div className={`absolute top-[325px] w-[1145px] h-[calc(100vh_-_((95px) * ${order.items.length}))] shadow-md bg-[#FFFFFF]`}>
             <div className="h-[52px] border-b border-[#929395]">
               <div className="absolute top-[10px] left-[23px] font-work font-bold text-[22px]">
                 Items

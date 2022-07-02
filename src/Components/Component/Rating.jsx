@@ -1,7 +1,7 @@
 import Stars from "./Stars"
 import StarRatings from "react-star-ratings";
 import { useSelector, useDispatch } from "react-redux";
-import { selectImage, selectSingleProduct, selectRating, selectReviews } from "../../Redux/Products/selectors";
+import { selectImage, selectSingleProduct, selectRating, selectReviews } from "../../Redux/Product/selectors";
 const Rating = () => {
     const rating = useSelector(selectRating)
     const reviews = useSelector(selectReviews)

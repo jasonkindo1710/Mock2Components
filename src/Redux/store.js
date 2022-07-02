@@ -1,5 +1,5 @@
 import authReducer from "./Auth/reducer"
-import productReducer from "./Products/reducer"
+import productReducer from "./Product/reducer"
 import cartReducer from "./Cart/reducer"
 import orderReducer from "./Orders/reducer"
 import userReducer from "./User/reducer"

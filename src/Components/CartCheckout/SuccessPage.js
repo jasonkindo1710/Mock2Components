@@ -26,7 +26,7 @@ function SuccessPage() {
   const order = useSelector(selectOrderById);
 
 
-  const myOrder = order.orders.result[0];
+  const myOrder = order?.orders?.result[0];
 
   console.log(myOrder);
 
@@ -66,24 +66,24 @@ function SuccessPage() {
                 </div>
                 <div className="flex justify-between text-[18px] font-sans mb-[5px]">
                   <p>Payment Type:</p>
-                  <p>{myOrder.paymentMethod}</p>
+                  <p>{myOrder?.paymentMethod}</p>
                 </div>
                 <div className="flex justify-between text-[18px] font-sans mb-[5px]">
                   <p>Address:</p>
-                  <p>15 lorem district 245</p>
+                  <p className="w-[160px] h-[27px] overflow-hidden text-right">{myOrder?.address}</p>
                 </div>
                 <div className="flex justify-between text-[18px] font-sans mb-[5px]">
                   <p>Contact:</p>
-                  <p>{myOrder.contact}</p>
+                  <p>{myOrder?.contact}</p>
                 </div>
                 <hr className="border border-solid border-[#DFE3E8] w-[full] mb-[5px]" />
                 <div className="flex justify-between text-[25px] font-semibold font-sans mt-[10px] mb-[5px]">
                   <p className="text-[#C4C4C4]">Total:</p>
-                  <p>$ {myOrder.totalPrice}</p>
+                  <p>$ {myOrder?.totalPrice}</p>
                 </div>
                 <div className="flex justify-between text-[25px] font-semibold font-sans mt-[-20px] mb-[5px]">
                   <p className="text-[#C4C4C4]">Transaction ID:</p>
-                  <p>{myOrder.id}</p>
+                  <p>{myOrder?.id}</p>
                 </div>
                 <div className="flex justify-center mt-[10px]">
                   <button

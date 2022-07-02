@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { RiArrowLeftSLine } from "react-icons/ri";
-import { getAllProducts } from "../../Redux/Products/actions";
+
 import { useSelector, useDispatch } from "react-redux";
 const PaginationHome = () => {
   let [num, setNum] = useState(1);

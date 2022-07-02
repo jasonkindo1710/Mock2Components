@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories } from "../../Redux/Products/actions";
-import { selectAllCategories } from "../../Redux/Products/selectors";
+import { getCategories } from "../../Redux/Product/actions";
+import { selectAllCategories } from "../../Redux/Product/selectors";
 const NavTabs = () => {
   const dispatch = useDispatch()
   useEffect(() => {

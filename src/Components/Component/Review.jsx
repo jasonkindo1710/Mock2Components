@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { selectSingleProductReview } from "../../Redux/Products/selectors";
+import { selectSingleProductReview } from "../../Redux/Product/selectors";
 import { useState } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { RiArrowLeftSLine } from "react-icons/ri";

@@ -4,12 +4,12 @@ import { AiFillStar } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import StarRatings from "react-star-ratings";
 import { useEffect, useState , useRef } from "react";
-import { selectAllProducts } from "../../Redux/Products/selectors";
+import { selectAllProducts } from "../../Redux/Product/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getAllProducts,
   getSingleProduct,
-} from "../../Redux/Products/actions";
+} from "../../Redux/Product/actions";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

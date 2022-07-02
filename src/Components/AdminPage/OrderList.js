@@ -15,10 +15,13 @@ function OrderList() {
   const role = useSelector(selectUserRole);
   const orderList = useSelector(selectAllOrderAdmin);
   const [data, setData] = useState(orderList);
+  const [indexItem, setIndexItem] = useState(1)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  let tableLength = orderList.result.length
+  console.log(tableLength)
 
   let [num, setNum] = useState(1);
   let [cur, setCur] = useState(1);
@@ -64,7 +67,7 @@ function OrderList() {
   };
 
   return (
-    <div className="h-[1000px] w-[1217px] bg-[#F5F7FA] relative">
+    <div className={`h-[calc(100vh_+_(84px)_*_${tableLength})] w-[1217px] bg-[#F5F7FA] relative `}>
       <div className="absolute left-[32px] top-[25px]">
         <div className="w-[226px] h-[18px] text-[18px] leading-[20.7px] text-[#929395]">
           <p>Dashboard / Order</p>
@@ -72,7 +75,7 @@ function OrderList() {
         <div className="w-[226px] h-[31px] text-[35px] leading-[41.06px] font-semibold mt-[31px]">
           <p>Orders</p>
         </div>
-        <div className="w-[1153px] min-h-[1000px] max-h-[2000px] bg-[#FFFFFF] shadow-md border border-solid border-[black] mt-[31px] relative">
+        <div className={`w-[1153px] h-[calc(100vh_+_(84px)_*_${tableLength}_-_(250px))] bg-[#FFFFFF] shadow-md  mt-[31px] relative`}>
           <div className="absolute left-[30px] top-[43.92px] w-[1093px] h-[51.08px] border-[1.5px] border-[#C4C4C4]">
             <div className=" flex ">
               <IoMdSearch
@@ -88,8 +91,8 @@ function OrderList() {
             </div>
           </div>
           <hr className="absolute top-[125.9px] w-[1153px] border-t border-solid border-[black]" />
-          <div className="absolute top-[126px]">
-            <table className="w-[1153px] table-auto">
+          <div className={`absolute top-[126px] `}>
+            <table className="w-[1153px] ">
               <tbody>
                 <tr className="h-[84px] ">
                   <th className="w-[80px] h-[20px] font-bold text-[20px] leading-[23px]">
@@ -192,7 +195,7 @@ function OrderList() {
                   .map((order, index) => (
                     <tr
                       key={order.id}
-                      className="h-[84px] border-b border-solid border-[#929395] cursor-pointer"
+                      className="h-[84px] my-[2px] border-b border-solid border-[#929395] cursor-pointer"
                       onClick={() => {
                         handlePageChange(order.id);
                       }}
@@ -206,7 +209,7 @@ function OrderList() {
                       <td className="w-[100px] h-[20px] text-[20px] leading-[23px] text-center">
                         ${order.totalPrice}
                       </td>
-                      <td className="w-[100px] h-[20px] text-[20px] leading-[23px] text-center">
+                      <td className="w-[100px] h-[20px] text-[18px] leading-[23px] text-center overflow-hidden">
                         {order.address}
                       </td>
                       <td className="w-[100px] h-[20px] text-[20px] leading-[23px] text-center">

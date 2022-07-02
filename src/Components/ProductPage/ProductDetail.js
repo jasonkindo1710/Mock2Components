@@ -14,7 +14,7 @@ import {
   selectImage,
   selectSingleProduct,
   selectSingleProductReview,
-} from "../../Redux/Products/selectors";
+} from "../../Redux/Product/selectors";
 import StarRatings from "react-star-ratings";
 import NavTabs from "./NavTabs";
 import {
@@ -24,7 +24,7 @@ import {
 } from "../../Redux/Auth/selectors";
 import { createNewCart, addNewItemToCart, getCartById } from "../../Redux/Cart/actions";
 import { selectAllCart, selectNewCartId } from "../../Redux/Cart/selectors";
-import { getSingleProduct } from "../../Redux/Products/actions";
+import { getSingleProduct } from "../../Redux/Product/actions";
 
 function ProductDetail() {
   const [rating, setRating] = useState(0);
