@@ -92,7 +92,7 @@ function OrderList() {
           </div>
           <hr className="absolute top-[125.9px] w-[1153px] border-t border-solid border-[black]" />
           <div className={`absolute top-[126px] `}>
-            <table className="w-[1153px] ">
+            <table className={`w-[1153px] `}>
               <tbody>
                 <tr className="h-[84px] ">
                   <th className="w-[80px] h-[20px] font-bold text-[20px] leading-[23px]">

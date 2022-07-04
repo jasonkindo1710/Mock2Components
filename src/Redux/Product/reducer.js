@@ -35,6 +35,10 @@ const productSlice = createSlice({
     getCategoriesSuccess: (state, action) => {
       state.isFetching = false;
       state.allCategories = action.payload
+  },
+  searchProductSuccess: (state,action) => {
+    state.allProducts = action.payload;
+    state.status = "success"
   }
   },
 });
@@ -45,6 +49,7 @@ export const {
   getSingleProductSuccess,
   getSingleProductFailed,
   createReview,
-  getCategoriesSuccess
+  getCategoriesSuccess,
+  searchProductSuccess
 } = productSlice.actions;
 export default productSlice.reducer;

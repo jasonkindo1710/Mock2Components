@@ -7,13 +7,14 @@ import {
   getSingleProductSuccess,
   getSingleProductFailed,
   createReview,
-  getCategoriesSuccess
+  getCategoriesSuccess,
+  searchProductSuccess
 } from "./reducer";
 
-export const getAllProducts = async (dispatch, page) => {
+export const getAllProducts = async (dispatch, page, size) => {
   dispatch(getProductsStart());
   try {
-    const res = await axios.get(`/v1/products?page=${page}`);
+    const res = await axios.get(`/v1/products?page=${page}&size=${size}`);
     dispatch(getProductsSuccess(res.data));
   } catch (error) {
     dispatch(getProductsFailed());
@@ -69,4 +70,15 @@ export const getCategories = async (dispatch) => {
             content: err.response.data.message
         })
     }
+}
+
+//Search product
+export const searchProduct = async (dispatch, keyword) => {
+  try{
+    const res = await axios.get(`/v1/search?keyword=${keyword}`)
+        dispatch(searchProductSuccess(res.data));
+  }
+  catch(err){
+    console.log(err)
+  }
 }

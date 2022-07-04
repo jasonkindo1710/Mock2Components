@@ -7,16 +7,23 @@ import Login from "../../Redux/Auth/reducer";
 import { Dropdown, Menu, Modal } from "antd";
 import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai";
 import CartPopup from "./CartPopup";
-import { selectAllCart, selectNewCart, selectNewCartId } from "../../Redux/Cart/selectors";
+import {
+  selectAllCart,
+  selectNewCart,
+  selectNewCartId,
+} from "../../Redux/Cart/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartById } from "../../Redux/Cart/actions";
 import { selectAccessToken } from "../../Redux/Auth/selectors";
+import { searchProduct } from "../../Redux/Product/actions";
+import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
-  const onSearch = (value) => console.log(value);
   const [showModal, setShowModal] = useState(false);
   const [flag, setFlag] = useState(false);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
   const menu = (
     <Menu
       className="text-[30px]"
@@ -66,21 +73,28 @@ const TopBar = () => {
   const toggleCartModal = () => {
     setModal(!modal);
   };
-  const newCart = useSelector(selectNewCart)
+  const newCart = useSelector(selectNewCart);
   const cart = useSelector(selectAllCart);
-  
-  // console.log(cart.length)
- 
-  const accessToken = useSelector(selectAccessToken)
-  const newCartId = useSelector(selectNewCartId)
 
-  const dispatch = useDispatch()
+  const accessToken = useSelector(selectAccessToken);
+  const newCartId = useSelector(selectNewCartId);
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    getCartById(accessToken, cart[0]?.data?.cart.id, dispatch)
-    setFlag(!flag)
-  }, [cart])
-  //  console.log(newCart?.data?.items.length)
-  
+    getCartById(accessToken, cart[0]?.data?.cart.id, dispatch);
+    setFlag(!flag);
+  }, [cart]);
+
+  const handleSearch = () => {
+    searchProduct(dispatch, keyword);
+    navigate("/productsearch", { state: { keyword: keyword } });
+  };
+  const handleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      searchProduct(dispatch, keyword);
+      navigate("/productsearch", { state: { keyword: keyword } });
+    }
+  };
 
   return (
     <div>
@@ -110,57 +124,71 @@ const TopBar = () => {
                 Categories
               </p>
               <input
+                onKeyDown={(e) => handleSubmit(e)}
                 type="search"
                 className="ml-[12px] h-[29px] w-[270px] bg-[#C4C4C4] text-[#4B4B4B] border-none"
                 placeholder="Search Items"
+                onChange={(e) => setKeyword(e.target.value)}
               />
             </div>
-            <BiSearch className="text-[30px] cursor-pointer text-[#4B4B4B] mr-[9.37px]" />
+            <BiSearch
+              onClick={() => handleSearch()}
+              className="text-[30px] cursor-pointer text-[#4B4B4B] mr-[9.37px]"
+            />
           </div>
           <MdOutlineShoppingCart
             className="text-[40px] ml-[30px] cursor-pointer"
             onClick={() => toggleCartModal()}
           />
-          {newCart?.data?.items.length >= 1 ? <span className="w-[27px] h-[27px]  rounded-full bg-[#FFFDFD] text-[#8C7211] text-[14px] 
+          {newCart?.data?.items.length >= 1 ? (
+            <span
+              className="w-[27px] h-[27px]  rounded-full bg-[#FFFDFD] text-[#8C7211] text-[14px] 
           ml-[-20px] mt-[-30px]
-          font-bold font-roboto text-center">
-            <p className="mt-[3px]">{newCart?.data?.items.length}</p>
-          </span> : <span className="w-[27px] h-[27px] hidden rounded-full bg-[#FFFDFD] text-[#8C7211] text-[14px] 
+          font-bold font-roboto text-center"
+            >
+              <p className="mt-[3px]">{newCart?.data?.items.length}</p>
+            </span>
+          ) : (
+            <span
+              className="w-[27px] h-[27px] hidden rounded-full bg-[#FFFDFD] text-[#8C7211] text-[14px] 
           ml-[-20px] mt-[-30px]
-          font-bold font-roboto text-center">
-            <p className="mt-[3px]">{newCart?.data?.items.length}</p>
-          </span>}
-          
+          font-bold font-roboto text-center"
+            >
+              <p className="mt-[3px]">{newCart?.data?.items.length}</p>
+            </span>
+          )}
+
           <Dropdown overlay={menu} placement="bottom" arrow>
             <FiUser className="text-[40px] ml-[32.14px]" />
           </Dropdown>
           {showModal && <Login />}
         </div>
       </div>
-      {modal && newCart?.data?.items.length >=1 ?  (
+      {modal && newCart?.data?.items.length >= 1 ? (
         <div className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50">
-          <div
-            className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]"
-          >
+          <div className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]">
             <div className="absolute left-[950px] right-[177px] top-[8px] w-[360px] max-h-[500px] overflow-scroll">
               <CartPopup />
             </div>
           </div>
-        </div>) : modal && (
-        <div 
-        onClick={toggleCartModal}
-        className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 ">
+        </div>
+      ) : (
+        modal && (
           <div
-            className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]"
-            
+            onClick={toggleCartModal}
+            className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 "
           >
-            <div className="absolute left-[950px] right-[177px] top-[8px] w-[360px]">
+            <div className="w-[1440px] h-screen top-[160px] left-0 right-0 bottom-0 fixed  z-50 bg-[#1111114D]">
+              <div className="absolute left-[950px] right-[177px] top-[8px] w-[360px]">
                 <div className="absolute w-[338px] h-[113px] bg-[#FFF9F9] rounded-[5px] shadow-empty text-center">
-                  <p className="h-[19px] w-[328px] mt-[45px]">Your shopping cart is empty!</p>
+                  <p className="h-[19px] w-[328px] mt-[45px]">
+                    Your shopping cart is empty!
+                  </p>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
+        )
       )}
       {/* ) : modal && (
         <div 

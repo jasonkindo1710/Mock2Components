@@ -20,10 +20,11 @@ const RelatedProducts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [size, setSize] = useState(30)
   const products = useSelector(selectAllProducts);
 
   useEffect(() => {
-    getAllProducts(dispatch, page);
+    getAllProducts(dispatch, page, size);
   }, []);
 
   const handleClick = async (id) => {

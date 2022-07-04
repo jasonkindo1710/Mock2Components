@@ -6,12 +6,14 @@ import Login from "./Components/LoginPage/Login"
 
 import Productpage from './Components/ProductHomePage/ProductPageCategory';
 import ProductDetail from './Components/ProductPage/ProductDetail';
+import Productsearch from './Components/ProductHomePage/ProductPageSearch';
 import ShoppingCart from './Components/CartCheckout/ShoppingCart';
 import Checkout from './Components/CartCheckout/Checkout';
 import Main from './Components/HomePage/Main'
 import SuccessPage from './Components/CartCheckout/SuccessPage';
 import OrderList from './Components/AdminPage/OrderList';
 import OrderDetail from './Components/AdminPage/OrderDetail';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/productpage" element={<Productpage/>} />
+        <Route path="/productsearch" element={<Productsearch/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/productdetail' element={<ProductDetail />} />
         <Route path='/shoppingcart' element={<ShoppingCart />} />

@@ -1,58 +1,46 @@
-import React, { useEffect, useState } from "react";
-import Categories from "../Bar/CategoriesBar";
-import TopBar from "../Component/TopBar";
-import {
-  selectAccessToken,
-  selectAuth,
-  selectUserID,
-} from "../../Redux/Auth/selectors";
-import { useSelector, useDispatch } from "react-redux";
-import { selectNewCart } from "../../Redux/Cart/selectors";
-import ProductCard from "../Component/ProductCard";
-import ProfileBanner from "../Component/ProfileBanner";
-import { selectAllProducts, selectProduct } from "../../Redux/Product/selectors";
-import StarRatings from "react-star-ratings";
+import React from "react";
 import { BsCartPlus } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { selectAllProducts, selectSearchProducts } from "../../Redux/Product/selectors";
 import { getAllProducts, getSingleProduct } from "../../Redux/Product/actions";
-import { useNavigate } from "react-router-dom";
+import StarRatings from "react-star-ratings";
+import TopBar from "../Component/TopBar";
+import PaginationHome from "./PaginationHomepage";
+import NavTabs from "./NavTabs";
 
-function Main() {
+function Productsearch() {
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const auth = useSelector(selectAuth);
-  const userID = useSelector(selectUserID);
-  const accessToken = useSelector(selectAccessToken);
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(30);
-  useEffect(() => {
-    getAllProducts(dispatch, page, size);
-  }, [])
+  const location = useLocation()
+  const products = useSelector(selectSearchProducts);
+//   console.log(products);
+    const keyword = location.state.keyword
+  
 
-  const products = useSelector(selectAllProducts);
-  console.log(products)
   const handleClick = async (id) => {
     await getSingleProduct(dispatch, id);
     navigate("/productdetail");
   };
-  const [noOfElement, setNoOfElement] = useState(7);
-  const slice = products?.slice(0, noOfElement);
 
   return (
-    <div>
+    <div className="absolute top-[155px]">
       <header>
         <TopBar />
       </header>
-      <div className="absolute top-[170px]">
-        <Categories />
+      
+      <div className="ml-[20px] mt-[40px]">
+        <p className="font-bold font-sans text-[32px]">
+          {products?.length} Results for "{keyword}"
+        </p>
       </div>
-      <div></div>
-      <div className="absolute top-[800px]">
-        <ProfileBanner className="mt-[19px]" noOfElement={noOfElement} setNoOfElement={setNoOfElement} />
-        <div className="mt-[19px] w-[1200px] grid grid-cols-4 gap-4">
-        {slice?.filter((item) => parseInt(item.rating) === 5).map((product) => (
+      <div className="w-[1440px] grid grid-cols-4 gap-4 my-[20px] mx-[20px] ">
+        {products?.map((product) => (
           <div
             key={product.id}
-            className="w-[285px] h-[395px]  border border-solid border-[#B4B1B1] rounded-[5px] bg-[#FFFFFF]"
+            className="w-[305px] h-[395px]  border border-solid border-[#B4B1B1] rounded-[5px] bg-[#FFFFFF]"
           >
             <img
               src={product.images[0].url}
@@ -60,7 +48,7 @@ function Main() {
               className="w-[254px] h-[200px] mt-[8px] mx-auto rounded-[5px] shadow-image cursor-pointer"
               onClick={() => handleClick(product.id)}
             />
-            <div className="ml-[17px] mr-[26px] mt-[15px]">
+            <div className="ml-[25px] mr-[26px] mt-[15px]">
               <div className="w-[254x] h-[37px] mr-[68px]">
                 <p className="font-sans text-[29px] w-[254px] h-[37px] leading-[36.8px] font-bold hover:underline hover:underline-offset-1 ">
                   {product.name}
@@ -101,10 +89,12 @@ function Main() {
             </div>
           </div>
         ))}
-        </div>
+      </div>
+      <div className="mx-auto w-screen flex justify-center mb-[10px]">
+        <PaginationHome />
       </div>
     </div>
   );
 }
 
-export default Main;
+export default Productsearch;
